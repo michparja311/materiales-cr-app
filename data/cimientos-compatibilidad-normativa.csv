@@ -1,0 +1,13 @@
+﻿regla_id,descripcion,articulo_codigo,CR-CIM-01,CR-CIM-02,CR-CIM-03,CR-CIM-04,CR-CIM-05
+R1,Suelo expansivo,CC §4.4.1,condicionado,condicionado,recomendado,admitido,admitido
+R2,Suelo colapsable,CC §4.4.2,condicionado,admitido,recomendado,condicionado,admitido
+R3,Licuefacción,CC §4.4.3,excluido,excluido,admitido,admitido,recomendado
+R4,Relleno no compactado,CC §4.1.2,excluido,condicionado,recomendado,admitido,admitido
+R5,Área cimentación > 60%,CC §4.1.1,recomendado,admitido,condicionado,recomendado,admitido
+R6,Estrato resistente 4-5 m,CC,recomendado,recomendado,admitido,condicionado,admitido
+R7,Estrato resistente > 5 m,CC,admitido,admitido,admitido,recomendado,recomendado
+R8,Marcos rígidos desplante > 2.0 m,CC §4.3.1.e,condicionado,condicionado,admitido,recomendado,admitido
+R9,Riesgo de socavación,CC §4.1.2,condicionado,admitido,condicionado,recomendado,recomendado
+R10,Excavación junto a vecino,RC art. 410,excluido,condicionado,recomendado,condicionado,admitido
+R11,Suelo tixotrópico,CC §1.2.5,condicionado,admitido,recomendado,admitido,admitido
+R12,Vivienda diseño simplificado,CSCR §16.2.2,recomendado,recomendado,admitido,condicionado,excluido

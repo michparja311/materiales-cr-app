@@ -1,0 +1,32 @@
+﻿{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "constraints": { "required": true, "unique": true },
+      "example": "CR-CIM-01"
+    },
+    {
+      "name": "nombre",
+      "type": "string",
+      "constraints": { "required": true },
+      "example": "Placa corrida de concreto reforzado"
+    },
+    {
+      "name": "descripcion",
+      "type": "string",
+      "constraints": { "required": false }
+    },
+    {
+      "name": "componente",
+      "type": "string",
+      "constraints": { "required": true, "enum": ["cimientos"] }
+    },
+    {
+      "name": "zona_sismica_minima",
+      "type": "integer",
+      "constraints": { "required": true, "minimum": 1, "maximum": 4 }
+    }
+  ],
+  "primaryKey": "id"
+}

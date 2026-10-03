@@ -1,0 +1,21 @@
+﻿{
+  "fields": [
+    {
+      "name": "regla_id",
+      "type": "string",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "descripcion",
+      "type": "string",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "articulo_codigo",
+      "type": "string",
+      "constraints": { "required": false }
+    }
+  ],
+  "primaryKey": "regla_id",
+  "missingValues": [""]
+}

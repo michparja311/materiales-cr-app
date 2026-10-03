@@ -1,0 +1,35 @@
+﻿{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "constraints": { "required": true, "unique": true }
+    },
+    {
+      "name": "producto_id",
+      "type": "string",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "indicador",
+      "type": "string",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "nivel_evidencia",
+      "type": "string",
+      "constraints": { "required": true, "enum": ["E1", "E2", "E3", "E4", "E5", "sin_datos"] }
+    },
+    {
+      "name": "fuente_id",
+      "type": "string",
+      "constraints": { "required": false }
+    },
+    {
+      "name": "peso",
+      "type": "number",
+      "constraints": { "required": false, "minimum": 0, "maximum": 1 }
+    }
+  ],
+  "primaryKey": "id"
+}

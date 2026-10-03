@@ -1,0 +1,767 @@
+<title>Materiales de Uso</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#EEF0EA; --surface:#FFFFFF; --surface-2:#E2E6DC; --border:#C7CFC0;
+    --text:#141F19; --text-muted:#4C5850; --text-faint:#7C8880;
+    --accent:#1F6F52; --accent-ink:#F4FBF7; --accent-soft:#DCEBE1;
+    --accent2:#B5622A; --accent2-soft:#F3E1D3;
+    --good:#2E8B57; --warn:#C98A1A; --bad:#B4402A; --info:#2C6E8E;
+    --shadow: 0 1px 2px rgba(20,31,25,.06), 0 8px 24px -12px rgba(20,31,25,.18);
+    --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#101512; --surface:#171E1A; --surface-2:#1F2721; --border:#2C362F;
+      --text:#E7ECE6; --text-muted:#A9B3A6; --text-faint:#7C8880;
+      --accent:#4FBE8F; --accent-ink:#0B1712; --accent-soft:#1C3328;
+      --accent2:#E08A45; --accent2-soft:#3A2A1C;
+      --good:#4FBE8F; --warn:#E0A83F; --bad:#E5786A; --info:#5FA8C9;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 28px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101512; --surface:#171E1A; --surface-2:#1F2721; --border:#2C362F;
+    --text:#E7ECE6; --text-muted:#A9B3A6; --text-faint:#7C8880;
+    --accent:#4FBE8F; --accent-ink:#0B1712; --accent-soft:#1C3328;
+    --accent2:#E08A45; --accent2-soft:#3A2A1C;
+    --good:#4FBE8F; --warn:#E0A83F; --bad:#E5786A; --info:#5FA8C9;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 28px -12px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Public Sans', system-ui, -apple-system, sans-serif;
+    font-size:15px; line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Big Shoulders Display', 'Public Sans', sans-serif;
+    font-weight:800; text-transform:uppercase; letter-spacing:.02em;
+    text-wrap:balance; color:var(--text);
+  }
+  .mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric:tabular-nums; }
+  a{ color:var(--accent); }
+
+  .app{ display:grid; grid-template-columns: 320px 1fr; min-height:100vh; }
+  .app > *{ min-width:0; }
+  @media (max-width: 880px){ .app{ grid-template-columns: 1fr; } }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    background:var(--surface); border-right:1px solid var(--border);
+    padding:22px 20px 40px; position:relative; overflow:hidden;
+  }
+  .contours{ position:absolute; inset:0 0 auto 0; height:170px; opacity:.5; pointer-events:none; }
+  .brand{ position:relative; z-index:1; margin-bottom:22px; }
+  .brand .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); display:block; margin-bottom:6px;
+  }
+  .brand h1{ font-size:28px; margin:0; line-height:.95; }
+  .brand p{ color:var(--text-muted); font-size:13px; margin:8px 0 0; max-width:30ch; }
+
+  .field-group{ margin-bottom:22px; }
+  .field-group > label.section-label{
+    display:block; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint);
+    margin-bottom:10px;
+  }
+
+  .coord-row{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .coord-row label{ display:block; font-size:11px; color:var(--text-muted); margin-bottom:3px; }
+  .coord-row input{
+    width:100%; padding:8px 9px; border:1px solid var(--border); border-radius:7px;
+    background:var(--bg); color:var(--text); font-family:'IBM Plex Mono',monospace; font-size:13px;
+  }
+  .coord-row input:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+
+  .chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .chip{
+    border:1px solid var(--border); background:var(--surface-2); color:var(--text);
+    padding:5px 10px; border-radius:100px; font-size:12px; cursor:pointer;
+    font-family:'Public Sans',sans-serif;
+  }
+  .chip:hover{ border-color:var(--accent); color:var(--accent); }
+  .chip:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  .zone-card{
+    margin-top:12px; background:var(--accent-soft); border:1px solid var(--accent);
+    border-radius:var(--radius); padding:12px 13px;
+  }
+  .zone-card .zn{ font-weight:700; font-size:13.5px; color:var(--text); }
+  .zone-card p{ margin:6px 0 0; font-size:12.5px; color:var(--text-muted); }
+  .zone-stats{ display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
+  .zone-stat{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); }
+  .zone-stat b{ color:var(--text); }
+
+  .seg{ display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .seg button{
+    border:1px solid var(--border); background:var(--surface-2); color:var(--text);
+    padding:10px 8px; border-radius:8px; font-size:12.5px; cursor:pointer; text-align:left;
+    font-family:'Public Sans',sans-serif; line-height:1.25;
+  }
+  .seg button b{ display:block; font-size:12.5px; }
+  .seg button.active{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .seg button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  .comp-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .comp-btn{
+    border:1px solid var(--border); background:var(--surface-2); color:var(--text);
+    border-radius:8px; padding:10px 8px; cursor:pointer; display:flex; align-items:center; gap:8px;
+    font-family:'Public Sans',sans-serif; font-size:12.5px; font-weight:600;
+  }
+  .comp-btn svg{ flex:none; width:18px; height:18px; stroke:var(--text-muted); }
+  .comp-btn.active{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .comp-btn.active svg{ stroke:var(--accent-ink); }
+  .comp-btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  .side-footnote{ font-size:11px; color:var(--text-faint); margin-top:26px; line-height:1.5; }
+  .side-footnote a{ color:var(--text-faint); text-decoration:underline; }
+
+  /* ---------- Main ---------- */
+  main{ padding:26px 32px 60px; max-width:1080px; }
+  @media (max-width: 640px){ main{ padding:20px 16px 48px; } }
+
+  .topbar{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:26px; flex-wrap:wrap; }
+  .topbar h2{ font-size:26px; margin:0 0 4px; }
+  .topbar .sub{ color:var(--text-muted); font-size:13.5px; max-width:56ch; }
+  .update-badge{
+    display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border);
+    border-radius:100px; padding:7px 14px 7px 8px; font-size:12px; white-space:nowrap;
+  }
+  .dot{ width:8px; height:8px; border-radius:50%; background:var(--good); flex:none; }
+  .update-badge .mono{ color:var(--text-muted); }
+
+  section.block{ margin-bottom:34px; }
+  .block h3{ font-size:13px; letter-spacing:.08em; color:var(--text-faint); margin:0 0 14px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; font-weight:600; }
+
+  .rec-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:18px 20px; margin-bottom:12px; box-shadow:var(--shadow); position:relative;
+  }
+  .rec-card.top{ border-color:var(--accent); }
+  .rec-head{ display:flex; justify-content:space-between; gap:14px; align-items:flex-start; flex-wrap:wrap; }
+  .rec-rank{
+    font-family:'Big Shoulders Display',sans-serif; font-size:22px; color:var(--accent);
+    width:34px; flex:none; line-height:1;
+  }
+  .rec-titles{ flex:1; min-width:180px; }
+  .rec-titles .name{ font-weight:700; font-size:16px; }
+  .rec-titles .meta{ font-size:12px; color:var(--text-muted); margin-top:2px; }
+  .rec-price{ text-align:right; flex:none; }
+  .rec-price .amt{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:16px; }
+  .rec-price .unit{ font-size:11px; color:var(--text-faint); }
+
+  .badge{ display:inline-flex; align-items:center; gap:4px; font-size:10.5px; padding:2px 7px; border-radius:100px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.04em; }
+  .badge.verificado{ background:var(--accent-soft); color:var(--accent); }
+  .badge.estimado{ background:var(--accent2-soft); color:var(--accent2); }
+
+  .score-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:10px; margin:14px 0 10px; }
+  .score-item .lbl{ font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-faint); margin-bottom:4px; }
+  .score-bar{ height:5px; border-radius:4px; background:var(--surface-2); overflow:hidden; }
+  .score-bar > span{ display:block; height:100%; background:var(--accent); border-radius:4px; }
+
+  .flags{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 4px; }
+  .flag{ font-size:11px; padding:3px 8px; border-radius:100px; border:1px solid var(--border); color:var(--text-muted); }
+  .flag.good{ border-color:var(--good); color:var(--good); }
+  .flag.bad{ border-color:var(--bad); color:var(--bad); }
+  .flag.info{ border-color:var(--info); color:var(--info); }
+
+  details.just{ margin-top:12px; }
+  details.just > summary{
+    cursor:pointer; font-size:12.5px; color:var(--accent); font-weight:600; list-style:none;
+    display:flex; align-items:center; gap:6px;
+  }
+  details.just > summary::-webkit-details-marker{ display:none; }
+  details.just > summary::before{ content:"▸"; font-size:10px; transition:transform .15s; }
+  details.just[open] > summary::before{ transform:rotate(90deg); }
+  .just-body{ margin-top:10px; padding:12px 14px; background:var(--bg); border-radius:8px; border:1px solid var(--border); }
+  .just-body p{ margin:0 0 10px; font-size:13px; color:var(--text); }
+  .just-body p:last-child{ margin-bottom:0; }
+  .just-body .step{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:3px; }
+
+  /* ---------- Catalog table ---------- */
+  .catalog-controls{ display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap; align-items:center; }
+  .catalog-controls input[type=search]{
+    flex:1; min-width:180px; padding:9px 12px; border:1px solid var(--border); border-radius:8px;
+    background:var(--surface); color:var(--text); font-size:13px; font-family:'Public Sans',sans-serif;
+  }
+  .table-wrap{ overflow-x:auto; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); }
+  table{ width:100%; border-collapse:collapse; font-size:13px; min-width:640px; }
+  thead th{
+    text-align:left; padding:10px 14px; font-family:'IBM Plex Mono',monospace; font-size:10.5px;
+    text-transform:uppercase; letter-spacing:.05em; color:var(--text-faint); border-bottom:1px solid var(--border);
+    cursor:pointer; user-select:none; white-space:nowrap;
+  }
+  thead th:hover{ color:var(--accent); }
+  tbody td{ padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover{ background:var(--surface-2); }
+  td.price{ font-family:'IBM Plex Mono',monospace; white-space:nowrap; }
+
+  footer.notes{ margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--text-faint); line-height:1.6; }
+  footer.notes strong{ color:var(--text-muted); }
+
+  .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
+</style>
+
+<div class="app">
+  <aside class="sidebar">
+    <svg class="contours" viewBox="0 0 320 170" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-10 130 Q 60 90 120 120 T 260 100 T 340 130" fill="none" stroke="var(--accent)" stroke-width="1"/>
+      <path d="M-10 150 Q 70 110 140 140 T 280 120 T 340 150" fill="none" stroke="var(--accent)" stroke-width="1"/>
+      <path d="M-10 170 Q 80 130 160 160 T 300 140 T 340 170" fill="none" stroke="var(--accent)" stroke-width="1"/>
+      <path d="M-10 110 Q 50 70 110 100 T 240 80 T 340 110" fill="none" stroke="var(--accent2)" stroke-width="1"/>
+    </svg>
+
+    <div class="brand">
+      <span class="eyebrow">Base de datos técnica · Costa Rica</span>
+      <h1>Materiales<br>de Uso</h1>
+      <p>Selección de materiales de construcción según sitio, clima y tipo de proyecto.</p>
+    </div>
+
+    <div class="field-group">
+      <label class="section-label">1 · Coordenadas del sitio</label>
+      <div class="coord-row">
+        <div><label for="lat">Latitud</label><input type="text" id="lat" class="mono" value="9.9281" inputmode="decimal"></div>
+        <div><label for="lon">Longitud</label><input type="text" id="lon" class="mono" value="-84.0907" inputmode="decimal"></div>
+      </div>
+      <div class="chips" id="cityChips"></div>
+      <div class="zone-card" id="zoneCard"></div>
+    </div>
+
+    <div class="field-group">
+      <label class="section-label">2 · Categoría de uso</label>
+      <div class="seg" id="usoSeg"></div>
+    </div>
+
+    <div class="field-group">
+      <label class="section-label">3 · Componente constructivo</label>
+      <div class="comp-grid" id="compGrid"></div>
+    </div>
+
+    <p class="side-footnote">
+      Motor de decisión aplicado en el orden: <strong style="color:var(--text-muted)">(1)</strong> desempeño bioclimático/físico,
+      <strong style="color:var(--text-muted)">(2)</strong> resiliencia mecánica, <strong style="color:var(--text-muted)">(3)</strong> tecnología de recubrimientos,
+      <strong style="color:var(--text-muted)">(4)</strong> sostenibilidad de ciclo de vida. Ver notas de fuente al pie de página.
+    </p>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <div>
+        <h2 id="pageTitle">Recomendación · Cubierta</h2>
+        <p class="sub" id="pageSub">Ajusta el sitio, el uso y el componente en el panel lateral para recalcular la recomendación.</p>
+      </div>
+      <div class="update-badge"><span class="dot"></span> Datos demostrativos <span class="mono" id="lastUpdate">· revisión manual</span></div>
+    </div>
+
+    <section class="block">
+      <h3>Ranking de materiales recomendados</h3>
+      <div id="recList"></div>
+    </section>
+
+    <section class="block">
+      <h3>Catálogo completo</h3>
+      <div class="catalog-controls">
+        <input type="search" id="catalogSearch" placeholder="Buscar material, proveedor o componente…">
+      </div>
+      <div class="table-wrap">
+        <table id="catalogTable">
+          <thead>
+            <tr>
+              <th data-key="componente">Componente</th>
+              <th data-key="nombre">Material</th>
+              <th data-key="proveedor">Proveedor</th>
+              <th data-key="precio">Precio</th>
+              <th data-key="estado">Estado</th>
+              <th data-key="fecha">Actualizado</th>
+            </tr>
+          </thead>
+          <tbody id="catalogBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="notes">
+      <p><strong>Estado del catálogo:</strong> los materiales y precios visibles son datos demostrativos del prototipo y deben revisarse mediante la plantilla de investigación antes de incorporarse al catálogo publicado. Las etiquetas internas no equivalen todavía a validación profesional.</p>
+      <p><strong>Actualización semanal:</strong> no está automatizada en este MVP. Se implementará únicamente con fuentes autorizadas, historial de observaciones y control de calidad.</p>
+      <p><strong>Alcance académico:</strong> esta herramienta apoya la preselección y la discusión. No sustituye normativa aplicable, especificación contractual, diseño estructural, inspección del sitio ni criterio profesional.</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+/* ============================= DATOS ============================= */
+
+// Materiales base con coeficientes físicos/mecánicos verificados (única fuente: skill técnica cargada)
+const BASE = {
+  madera:    { nombre:"Madera (pino/local)", densidad:480,  k:0.072, cp:1680, E:162500, alpha:4.5e-5, elec:"aislante" },
+  plywood:   { nombre:"Plywood",              densidad:640,  k:0.174, cp:1760, E:null,   alpha:null,   elec:"aislante" },
+  hormigon:  { nombre:"Hormigón reforzado",   densidad:2410, k:1.100, cp:840,  E:390000, alpha:9.5e-5, elec:"aislante" },
+  ladrillo:  { nombre:"Ladrillo quemado",     densidad:1820, k:0.811, cp:880,  E:350000, alpha:null,   elec:"aislante" },
+  mortero:   { nombre:"Mortero de cemento",   densidad:1648, k:0.719, cp:920,  E:40000,  alpha:null,   elec:"aislante" },
+  yeso:      { nombre:"Yeso de cemento",      densidad:1762, k:0.721, cp:840,  E:null,   alpha:null,   elec:"aislante" },
+  acero:     { nombre:"Acero estructural",    densidad:null, k:null,  cp:null, E:2100000, alpha:1.2e-5, elec:"conductor" },
+  aluminio:  { nombre:"Aluminio",             densidad:null, k:null,  cp:null, E:700000,  alpha:2.3e-5, elec:"conductor" },
+  vidrio:    { nombre:"Vidrio",               densidad:null, k:null,  cp:null, E:700000,  alpha:8.5e-6, elec:"aislante" },
+};
+
+// Zonas climáticas de referencia (Costa Rica) — clasificación por vecino más cercano
+const ZONAS = [
+  { id:"guanacaste", nombre:"Pacífico Norte · Guanacaste (Seco Tropical)", lat:10.6346, lon:-85.4370,
+    clima:"Estación seca marcada (dic–abr), temperaturas de 27–33 °C, radiación solar muy alta y vientos fuertes (Papagayo). Humedad relativa baja en verano.",
+    dominante:"radiacion", humedad:3, salinidad:6, radiacion:9, lluvia:3, contaminacion:2 },
+  { id:"pacifico_central", nombre:"Pacífico Central", lat:9.9763, lon:-84.8384,
+    clima:"Cálido húmedo todo el año, lluvias intensas de mayo a noviembre, alta humedad relativa y exposición salina costera.",
+    dominante:"convectivo", humedad:8, salinidad:8, radiacion:7, lluvia:7, contaminacion:2 },
+  { id:"zona_sur", nombre:"Pacífico Sur · Zona Sur (Muy Húmedo)", lat:8.6448, lon:-83.1567,
+    clima:"Región más lluviosa del país (hasta ~5000 mm/año), humedad relativa muy alta casi constante; riesgo elevado de hongos y corrosión.",
+    dominante:"humedad", humedad:10, salinidad:5, radiacion:6, lluvia:10, contaminacion:1 },
+  { id:"valle_central", nombre:"Valle Central · GAM (Templado)", lat:9.9281, lon:-84.0907,
+    clima:"Clima templado 18–26 °C, lluvia moderada, mayor concentración urbana y contaminación por tránsito vehicular (NOx, hollín).",
+    dominante:"conduccion", humedad:5, salinidad:0, radiacion:5, lluvia:5, contaminacion:8 },
+  { id:"caribe", nombre:"Caribe · Limón", lat:9.9908, lon:-83.0344,
+    clima:"Lluvia distribuida todo el año sin estación seca definida, humedad relativa muy alta y fuerte exposición salina costera.",
+    dominante:"humedad", humedad:10, salinidad:9, radiacion:6, lluvia:9, contaminacion:2 },
+  { id:"zona_norte", nombre:"Zona Norte · San Carlos–Los Chiles", lat:10.3238, lon:-84.4267,
+    clima:"Cálido húmedo, alta pluviosidad sobre llanuras; exposición salina baja comparada con la costa.",
+    dominante:"humedad", humedad:9, salinidad:1, radiacion:6, lluvia:8, contaminacion:1 },
+];
+
+const CIUDADES = [
+  { nombre:"San José", lat:9.9281, lon:-84.0907 },
+  { nombre:"Liberia", lat:10.6346, lon:-85.4370 },
+  { nombre:"Puntarenas", lat:9.9763, lon:-84.8384 },
+  { nombre:"Limón", lat:9.9908, lon:-83.0344 },
+  { nombre:"Pérez Zeledón", lat:9.3717, lon:-83.7024 },
+  { nombre:"Ciudad Quesada", lat:10.3238, lon:-84.4267 },
+];
+
+const USOS = [
+  { id:"residencial", nombre:"Residencial", nota:"Confort térmico y costo", w:{confort:.25, costo:.25, durabilidad:.15, mantenimiento:.10, estetica:.20, higiene:.00, sostenibilidad:.05} },
+  { id:"comercial", nombre:"Comercial", nota:"Estética y durabilidad", w:{confort:.10, costo:.20, durabilidad:.20, mantenimiento:.15, estetica:.25, higiene:.05, sostenibilidad:.05} },
+  { id:"institucional_admin", nombre:"Institucional Administrativo", nota:"Bajo mantenimiento y ciclo de vida", w:{confort:.10, costo:.15, durabilidad:.25, mantenimiento:.20, estetica:.05, higiene:.05, sostenibilidad:.20} },
+  { id:"institucional_salud", nombre:"Institucional Salud", nota:"Higiene y bajas emisiones", w:{confort:.05, costo:.05, durabilidad:.15, mantenimiento:.15, estetica:.00, higiene:.45, sostenibilidad:.15} },
+];
+
+const COMPONENTES = [
+  { id:"cubierta", nombre:"Cubierta", icon:"M3 11 12 4l9 7M5 11v8h14v-8" },
+  { id:"cerramientos", nombre:"Cerramientos", icon:"M3 5h18M3 10h18M3 15h18M3 20h18M8 5v5M16 10v5M8 15v5" },
+  { id:"pisos", nombre:"Pisos", icon:"M3 9h18M3 15h18M9 3v18M15 3v18" },
+  { id:"cielo_rasos", nombre:"Cielo rasos", icon:"M3 6h18M3 6l4 4M9 6l4 4M15 6l4 4M3 6l0 0M21 6v0" },
+  { id:"puertas", nombre:"Puertas", icon:"M6 3h9v18H6zM12 12h.01" },
+  { id:"ventanas", nombre:"Ventanas", icon:"M4 4h16v16H4zM12 4v16M4 12h16" },
+];
+
+// Catálogo de productos. base: clave en BASE (o null si no hay coeficiente verificado -> N/D)
+const PRODUCTOS = [
+  // ---- CUBIERTA ----
+  { id:"cub_zinc", componente:"cubierta", nombre:"Lámina de techo, acero galvanizado ondulado", base:"acero",
+    proveedor:"EPA Costa Rica", precio:7200, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:false, radiacionApto:false, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:4, durabilidad:6, mantenimiento:5, estetica:5, higiene:5, sostenibilidad:5 },
+    notaMecanica:"Requiere galvanizado + recubrimiento anticorrosivo en zonas de salinidad alta; los tornillos de fijación deben ser de acero inoxidable para evitar par galvánico." },
+  { id:"cub_fibrocemento", componente:"cubierta", nombre:"Teja de fibrocemento (libre de asbesto)", base:"mortero",
+    proveedor:"EPA Costa Rica", precio:8900, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:true, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:6, durabilidad:8, mantenimiento:7, estetica:5, higiene:6, sostenibilidad:6 },
+    notaMecanica:"Exigir certificación libre de asbesto (crisotilo) previa a especificar." },
+  { id:"cub_madlam", componente:"cubierta", nombre:"Estructura de madera laminada para techo", base:"madera",
+    proveedor:"Referencia de mercado", precio:23500, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:false, autolimpieza:false, fsc:true, claseE1:null },
+    sub:{ confort:9, durabilidad:6, mantenimiento:6, estetica:8, higiene:6, sostenibilidad:9 },
+    notaMecanica:"Aplicar tratamiento fungicida/ignífugo (clasificación B-s1-d0) en zonas de humedad relativa alta." },
+  { id:"cub_losa", componente:"cubierta", nombre:"Losa de hormigón armado (azotea/techo plano)", base:"hormigon",
+    proveedor:"Referencia de mercado", precio:31000, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:true, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:5, durabilidad:9, mantenimiento:6, estetica:4, higiene:6, sostenibilidad:4 },
+    notaMecanica:"Alta masa térmica; buen desempeño frente a viento huracanado y radiación indirecta, requiere impermeabilización de losa." },
+
+  // ---- CERRAMIENTOS ----
+  { id:"cer_block", componente:"cerramientos", nombre:"Block de concreto 15×20×40 cm", base:"hormigon",
+    proveedor:"Referencia de mercado", precio:990, unidad:"unidad", estado:"estimado", fecha:null,
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:true, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:5, durabilidad:9, mantenimiento:7, estetica:4, higiene:6, sostenibilidad:5 },
+    notaMecanica:"Poroso sin tratamiento: recomendable aditivar el mortero de pega con nanosílice en zonas de lluvia alta (ver ficha técnica)." },
+  { id:"cer_ladrillo", componente:"cerramientos", nombre:"Ladrillo quemado tradicional", base:"ladrillo",
+    proveedor:"Referencia de mercado", precio:410, unidad:"unidad", estado:"estimado", fecha:null,
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:false, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:7, durabilidad:7, mantenimiento:6, estetica:7, higiene:5, sostenibilidad:6 },
+    notaMecanica:"Alta inercia térmica tradicional; requiere repello impermeabilizado en fachadas expuestas a lluvia directa." },
+  { id:"cer_machihembrado", componente:"cerramientos", nombre:"Panel machihembrado de madera (teca/pino/laurel)", base:"madera",
+    proveedor:"EPA Costa Rica", precio:14500, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:false, autolimpieza:false, fsc:true, claseE1:null },
+    sub:{ confort:9, durabilidad:5, mantenimiento:5, estetica:9, higiene:6, sostenibilidad:9 },
+    notaMecanica:"Exigir certificación FSC/PEFC de cadena de custodia; tratar con fungicida en Caribe y Zona Sur." },
+  { id:"cer_vidrioblock", componente:"cerramientos", nombre:"Vidrio block brillante Marina 19×19×8 cm", base:"vidrio",
+    proveedor:"EPA Costa Rica", precio:1995, unidad:"unidad", estado:"verificado", fecha:"2026-08-25",
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:false, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:5, durabilidad:8, mantenimiento:8, estetica:8, higiene:8, sostenibilidad:6 },
+    notaMecanica:"Aislante eléctrico; su bajo coeficiente de dilatación (8.5×10⁻⁶ °C⁻¹) reduce el riesgo de fisuración en juntas frente al concreto perimetral." },
+  { id:"cer_nanosilice", componente:"cerramientos", nombre:"Mortero de repello con nanosílice hidrofóbica", base:"mortero",
+    proveedor:"Referencia de mercado", precio:3200, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:true, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:6, durabilidad:9, mantenimiento:9, estetica:6, higiene:7, sostenibilidad:6 },
+    notaMecanica:"Con aditivo Centrilit NC (5%), ángulo de contacto de 158.9° (impermeabilidad total) y absorción capilar de 0.07 kg/(m²·h^0.5), frente a 0.37 del mortero base." },
+
+  // ---- PISOS ----
+  { id:"pis_porcelanato", componente:"pisos", nombre:"Porcelanato 60×120 cm gris mármol esmaltado", base:null,
+    proveedor:"EPA Costa Rica", precio:9005, unidad:"m²", estado:"verificado", fecha:"2026-08-25",
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:4, durabilidad:9, mantenimiento:9, estetica:9, higiene:9, sostenibilidad:6 },
+    notaMecanica:"Superficie esmaltada de muy baja porosidad: recomendado como estándar en Institucional Salud por facilidad de desinfección." },
+  { id:"pis_laminado", componente:"pisos", nombre:"Piso laminado de madera", base:"madera",
+    proveedor:"EPA Costa Rica", precio:11200, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:true, claseE1:true },
+    sub:{ confort:9, durabilidad:5, mantenimiento:5, estetica:8, higiene:5, sostenibilidad:8 },
+    notaMecanica:"No recomendado en Caribe/Zona Sur (humedad relativa >85%) por hinchazón del núcleo de fibra." },
+  { id:"pis_vinilico", componente:"pisos", nombre:"Piso vinílico en rollo/losetas", base:null,
+    proveedor:"Referencia de mercado", precio:9800, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:true },
+    sub:{ confort:6, durabilidad:6, mantenimiento:8, estetica:6, higiene:7, sostenibilidad:3 },
+    notaMecanica:"Exigir clasificación de emisión de formaldehído Clase E1 (<3.5 mg/m²h) según prEN 13986." },
+  { id:"pis_concreto", componente:"pisos", nombre:"Concreto pulido industrial", base:"hormigon",
+    proveedor:"Referencia de mercado", precio:14800, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:true, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:3, durabilidad:9, mantenimiento:8, estetica:6, higiene:7, sostenibilidad:5 },
+    notaMecanica:"Alta masa térmica (1.100 W/mK); frío al tacto en Valle Central, ventaja en Guanacaste por disipación de radiación." },
+
+  // ---- CIELO RASOS ----
+  { id:"cie_acceso", componente:"cielo_rasos", nombre:"Panel de acceso a cielo raso 60×60 cm", base:"yeso",
+    proveedor:"EPA Costa Rica", precio:10995, unidad:"unidad", estado:"verificado", fecha:"2026-08-25",
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:5, durabilidad:6, mantenimiento:8, estetica:5, higiene:6, sostenibilidad:5 },
+    notaMecanica:"Desmontable: facilita mantenimiento de ductos e instalaciones sobre cielo raso." },
+  { id:"cie_difusor", componente:"cielo_rasos", nombre:"Lámina difusora de luz Vienna 61×61 cm", base:null,
+    proveedor:"EPA Costa Rica", precio:11695, unidad:"unidad", estado:"verificado", fecha:"2026-08-25",
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:5, durabilidad:6, mantenimiento:7, estetica:8, higiene:6, sostenibilidad:4 },
+    notaMecanica:"Translúcida; uso típico sobre luminarias en oficinas comerciales/administrativas." },
+  { id:"cie_suspendido", componente:"cielo_rasos", nombre:"Panel de cielo raso suspendido", base:"yeso",
+    proveedor:"EPA Costa Rica", precio:5195, unidad:"unidad", estado:"verificado", fecha:"2026-08-25",
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:5, durabilidad:5, mantenimiento:7, estetica:5, higiene:6, sostenibilidad:5 },
+    notaMecanica:"Económico y de instalación rápida; mejora el aislamiento acústico entre entrepisos." },
+  { id:"cie_pvc", componente:"cielo_rasos", nombre:"Tablilla de PVC para cielo raso", base:null,
+    proveedor:"Referencia de mercado", precio:6400, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:5, durabilidad:8, mantenimiento:9, estetica:5, higiene:8, sostenibilidad:2 },
+    notaMecanica:"100% resistente a humedad; estándar recomendado en zonas húmedas (baños, cuartos técnicos, Caribe/Zona Sur). Bajo perfil de sostenibilidad por no ser reciclable localmente." },
+  { id:"cie_madera", componente:"cielo_rasos", nombre:"Cielo raso de madera machihembrada", base:"madera",
+    proveedor:"EPA Costa Rica", precio:16800, unidad:"m²", estado:"estimado", fecha:null,
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:false, autolimpieza:false, fsc:true, claseE1:null },
+    sub:{ confort:9, durabilidad:5, mantenimiento:5, estetica:9, higiene:5, sostenibilidad:9 },
+    notaMecanica:"Requiere tratamiento fungicida/barniz en climas de humedad relativa alta; accesorios de cornisa desde ¢4.195 (EPA)." },
+
+  // ---- PUERTAS ----
+  { id:"pue_pino", componente:"puertas", nombre:"Puerta de pino 2 tableros, diseño curvo 210×85 cm", base:"madera",
+    proveedor:"EPA Costa Rica", precio:48950, unidad:"unidad", estado:"verificado", fecha:"2026-08-25",
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:true, claseE1:null },
+    sub:{ confort:8, durabilidad:6, mantenimiento:5, estetica:8, higiene:5, sostenibilidad:8 },
+    notaMecanica:"Exigir certificación FSC/PEFC y sellador en ambos cantos si se instala en Caribe/Zona Sur." },
+  { id:"pue_laminada", componente:"puertas", nombre:"Puerta laminada (núcleo MDF/HDF)", base:null,
+    proveedor:"Referencia de mercado", precio:32000, unidad:"unidad", estado:"estimado", fecha:null,
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:true },
+    sub:{ confort:6, durabilidad:5, mantenimiento:6, estetica:7, higiene:5, sostenibilidad:5 },
+    notaMecanica:"Exigir Clase E1 de emisión de formaldehído; sensible a hinchazón si el canto inferior no está sellado." },
+  { id:"pue_pvc", componente:"puertas", nombre:"Puerta de PVC para áreas húmedas", base:null,
+    proveedor:"Referencia de mercado", precio:38500, unidad:"unidad", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:5, durabilidad:8, mantenimiento:9, estetica:5, higiene:8, sostenibilidad:3 },
+    notaMecanica:"Estándar recomendado para áreas húmedas de salud (quirófanos, servicios) por resistencia a limpieza química frecuente." },
+  { id:"pue_metalica", componente:"puertas", nombre:"Puerta metálica de seguridad (acero)", base:"acero",
+    proveedor:"Referencia de mercado", precio:95000, unidad:"unidad", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:false, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:4, durabilidad:8, mantenimiento:6, estetica:5, higiene:6, sostenibilidad:6 },
+    notaMecanica:"Material conductor eléctrico: exige puesta a tierra del marco en zonas de alta actividad eléctrica atmosférica; galvanizar + pintar en zonas costeras." },
+
+  // ---- VENTANAS ----
+  { id:"ven_pvc", componente:"ventanas", nombre:"Ventana de PVC con mosquitero 1.5×1 m", base:null,
+    proveedor:"EPA Costa Rica", precio:59950, unidad:"unidad", estado:"verificado", fecha:"2026-08-25",
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:7, durabilidad:8, mantenimiento:9, estetica:6, higiene:7, sostenibilidad:4 },
+    notaMecanica:"Aislante eléctrico y sin riesgo de corrosión galvánica; el mejor desempeño costo-mantenimiento en Caribe y Pacífico." },
+  { id:"ven_aluminio", componente:"ventanas", nombre:"Ventana de aluminio", base:"aluminio",
+    proveedor:"Referencia de mercado", precio:47000, unidad:"unidad", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:false, radiacionApto:null, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:6, durabilidad:7, mantenimiento:6, estetica:8, higiene:6, sostenibilidad:7 },
+    notaMecanica:"Conductor eléctrico y con coeficiente de dilatación de 2.3×10⁻⁵ °C⁻¹; exigir anodizado en zonas de salinidad alta para evitar corrosión por picadura." },
+  { id:"ven_madera", componente:"ventanas", nombre:"Ventana con marco de madera y vidrio simple", base:"vidrio",
+    proveedor:"Referencia de mercado", precio:52000, unidad:"unidad", estado:"estimado", fecha:null,
+    flags:{ humedoOK:false, salinoOK:true, radiacionApto:null, autolimpieza:false, fsc:true, claseE1:null },
+    sub:{ confort:7, durabilidad:5, mantenimiento:4, estetica:9, higiene:6, sostenibilidad:8 },
+    notaMecanica:"El bajo coeficiente de dilatación del vidrio (8.5×10⁻⁶ °C⁻¹) frente al marco de madera exige selladores elásticos en el junquillo." },
+  { id:"ven_electrocromico", componente:"ventanas", nombre:"Ventana con vidrio electrocrómico", base:"vidrio",
+    proveedor:"Referencia de mercado", precio:210000, unidad:"unidad", estado:"estimado", fecha:null,
+    flags:{ humedoOK:true, salinoOK:true, radiacionApto:true, autolimpieza:false, fsc:null, claseE1:null },
+    sub:{ confort:9, durabilidad:7, mantenimiento:6, estetica:8, higiene:6, sostenibilidad:6 },
+    notaMecanica:"Modula hasta el 68% del espectro solar de forma variable; recomendada en fachadas de alta radiación (Guanacaste) para uso comercial/institucional premium." },
+];
+
+/* ============================= ESTADO ============================= */
+let estado = { lat:9.9281, lon:-84.0907, uso:"residencial", componente:"cubierta" };
+
+/* ============================= UTILIDADES ============================= */
+function haversine(lat1,lon1,lat2,lon2){
+  const R=6371, toRad=d=>d*Math.PI/180;
+  const dLat=toRad(lat2-lat1), dLon=toRad(lon2-lon1);
+  const a=Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+function zonaMasCercana(lat,lon){
+  let best=null, bestD=Infinity;
+  for(const z of ZONAS){
+    const d=haversine(lat,lon,z.lat,z.lon);
+    if(d<bestD){ bestD=d; best=z; }
+  }
+  return best;
+}
+function fmtColones(n){ return "₡" + n.toLocaleString("es-CR"); }
+function clamp(n,min,max){ return Math.max(min,Math.min(max,n)); }
+
+function ajustarSubscores(p, zona, componenteId){
+  const s = {...p.sub};
+  const f = p.flags;
+  if(zona.humedad>=7 && f.humedoOK===false){ s.durabilidad-=3; s.mantenimiento-=2; }
+  if(zona.humedad>=7 && f.humedoOK===true){ s.durabilidad+=1; }
+  if(zona.salinidad>=6 && f.salinoOK===false){ s.durabilidad-=3; }
+  if(zona.salinidad>=6 && f.salinoOK===true){ s.durabilidad+=1; }
+  if(zona.radiacion>=8 && f.radiacionApto===true){ s.confort+=2; }
+  if(zona.radiacion>=8 && f.radiacionApto===false){ s.confort-=1; }
+  if(zona.contaminacion>=7 && f.autolimpieza){ s.mantenimiento+=2; s.higiene+=1; }
+  if(zona.lluvia>=8 && ["cubierta","cerramientos","ventanas"].includes(componenteId) && f.humedoOK===false){ s.durabilidad-=1; }
+  for(const k in s) s[k]=clamp(s[k],0,10);
+  return s;
+}
+
+function calcularCostoScore(precio, min, max){
+  if(max===min) return 7;
+  // más barato = score más alto (10..3)
+  const t=(precio-min)/(max-min);
+  return clamp(10 - t*7, 3, 10);
+}
+
+function puntuar(p, zona, uso, min, max){
+  const s = ajustarSubscores(p, zona, p.componente);
+  const costo = calcularCostoScore(p.precio, min, max);
+  const w = uso.w;
+  const total = s.confort*w.confort + costo*w.costo + s.durabilidad*w.durabilidad +
+                s.mantenimiento*w.mantenimiento + s.estetica*w.estetica + s.higiene*w.higiene +
+                s.sostenibilidad*w.sostenibilidad;
+  return { total: total, sub: {...s, costo} };
+}
+
+/* ============================= NARRATIVA TÉCNICA ============================= */
+function justificar(p, zona, uso){
+  const base = p.base ? BASE[p.base] : null;
+  const parr = [];
+
+  // Paso 1 — bioclimático
+  if(base && base.k){
+    let interpretacion;
+    if(zona.dominante==="radiacion" || zona.dominante==="convectivo"){
+      interpretacion = base.k>=1 ? "actúa como masa térmica eficiente frente a la carga radiante e indirecta del entorno" : "conduce poco calor por sí mismo, pero en climas de alta radiación conviene combinarlo con una masa térmica de respaldo";
+    } else {
+      interpretacion = base.k<0.2 ? "retarda de forma significativa la conducción de calor hacia el interior, por su bajísima conductividad" : "tiene un desempeño intermedio frente a la conducción de calor";
+    }
+    parr.push(`Con conductividad térmica de ${base.k} W/mK y calor específico de ${base.cp} J/kgK, este material ${interpretacion}. La zona detectada (${zona.nombre}) presenta un régimen térmico dominado por ${zona.dominante === 'radiacion' ? 'radiación solar directa' : zona.dominante === 'convectivo' ? 'convección por humedad y viento costero' : zona.dominante === 'conduccion' ? 'conducción en clima templado' : 'alta humedad ambiental persistente'}.`);
+  } else {
+    parr.push(`No se dispone en la base técnica de coeficientes de conductividad/calor específico verificados para este producto (N/D) — se recomienda solicitar la ficha técnica del fabricante antes de un cálculo de carga térmica formal. En términos cualitativos, el material ${p.flags.humedoOK ? "tolera bien" : "requiere protección adicional frente a"} la humedad relativa de ${zona.nombre}.`);
+  }
+
+  // Paso 2 — mecánico/resiliencia
+  if(base && base.E){
+    let alphaTxt = base.alpha ? ` y un coeficiente de dilatación térmica de ${base.alpha.toExponential(1)} °C⁻¹` : "";
+    parr.push(`Módulo de elasticidad de ${base.E.toLocaleString('es-CR')} kg/cm²${alphaTxt}, clasificado como material ${base.elec} eléctricamente. ${p.notaMecanica}`);
+  } else {
+    parr.push(`Sin módulo de elasticidad verificado en la base técnica para este producto comercial específico (N/D). ${p.notaMecanica}`);
+  }
+
+  // Paso 3 — tecnología avanzada
+  if(p.id==="cer_nanosilice"){
+    parr.push("Tecnología de recubrimiento con nanopartículas de sílice (Nano-SiO₂): rellena las cavidades de la pasta de cemento durante la hidratación, acelerando la cristalización C-S-H. Con aditivo Centrilit NC al 5%, el ángulo de contacto pasa de 16.4° (cemento Portland convencional, permeable) a 158.9° (impermeabilidad total), y la absorción capilar cae de 0.37 a 0.07 kg/(m²·h^0.5).");
+  } else if(zona.contaminacion>=7 && p.componente==="cerramientos"){
+    parr.push("En una zona de alta contaminación urbana (Valle Central/GAM) es recomendable evaluar un recubrimiento fotocatalítico de TiO₂ nanométrico: bajo radiación UV descompone materia orgánica en H₂O y CO₂, y transforma NOₓ en nitratos solubles lavables por la lluvia, aportando autolimpieza estética a la fachada.");
+  } else if(zona.humedad>=8 && p.flags.humedoOK===false && ["cerramientos","cubierta"].includes(p.componente)){
+    parr.push("Dada la humedad relativa muy alta de la zona, se recomienda aditivar el mortero de acabado con nanosílice hidrofóbica (tipo Centrilit NC) para reducir la absorción capilar de este componente, en vez de depender solo del material base.");
+  } else {
+    parr.push("No se identifica un requerimiento crítico de recubrimiento nanotecnológico adicional para esta combinación de zona y componente; un acabado convencional de buena calidad es suficiente.");
+  }
+
+  // Paso 4 — sostenibilidad
+  const sost = [];
+  if(p.flags.fsc) sost.push("cuenta con base para exigir certificación forestal FSC/PEFC de cadena de custodia");
+  if(p.flags.claseE1) sost.push("debe exigirse clasificación Clase E1 de emisión de formaldehído (<3.5 mg/m²h, prEN 13986)");
+  if(p.flags.claseE1===null && p.base===null) sost.push("solicitar Declaración Ambiental de Producto (EPD, norma EN 15804) al proveedor");
+  const salud = uso.id==="institucional_salud" ? " En proyectos de salud, priorizar además productos con acabado esmaltado/no poroso para facilitar la desinfección y limitar el crecimiento microbiano." : "";
+  parr.push(`Validación de ciclo de vida: ${sost.length ? sost.join("; ") + "." : "no se identifican certificaciones específicas aplicables; solicitar EPD (EN 15804) al proveedor."}${salud}`);
+
+  return parr;
+}
+
+/* ============================= RENDER ============================= */
+function renderCityChips(){
+  const el=document.getElementById("cityChips");
+  el.innerHTML = CIUDADES.map(c=>`<button class="chip" data-lat="${c.lat}" data-lon="${c.lon}">${c.nombre}</button>`).join("");
+  el.querySelectorAll(".chip").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.getElementById("lat").value = btn.dataset.lat;
+      document.getElementById("lon").value = btn.dataset.lon;
+      actualizarSitio();
+    });
+  });
+}
+
+function renderUsoSeg(){
+  const el=document.getElementById("usoSeg");
+  el.innerHTML = USOS.map(u=>`<button data-id="${u.id}" class="${u.id===estado.uso?'active':''}"><b>${u.nombre}</b>${u.nota}</button>`).join("");
+  el.querySelectorAll("button").forEach(btn=>{
+    btn.addEventListener("click", ()=>{ estado.uso=btn.dataset.id; renderUsoSeg(); render(); });
+  });
+}
+
+function renderCompGrid(){
+  const el=document.getElementById("compGrid");
+  el.innerHTML = COMPONENTES.map(c=>`
+    <button class="comp-btn ${c.id===estado.componente?'active':''}" data-id="${c.id}">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${c.icon}"/></svg>
+      ${c.nombre}
+    </button>`).join("");
+  el.querySelectorAll("button").forEach(btn=>{
+    btn.addEventListener("click", ()=>{ estado.componente=btn.dataset.id; renderCompGrid(); render(); });
+  });
+}
+
+function actualizarSitio(){
+  estado.lat = parseFloat(document.getElementById("lat").value) || estado.lat;
+  estado.lon = parseFloat(document.getElementById("lon").value) || estado.lon;
+  render();
+}
+
+function renderZoneCard(zona){
+  const el=document.getElementById("zoneCard");
+  el.innerHTML = `
+    <div class="zn">${zona.nombre}</div>
+    <p>${zona.clima}</p>
+    <div class="zone-stats">
+      <span class="zone-stat">HUM <b>${zona.humedad}/10</b></span>
+      <span class="zone-stat">SAL <b>${zona.salinidad}/10</b></span>
+      <span class="zone-stat">RAD <b>${zona.radiacion}/10</b></span>
+      <span class="zone-stat">LLUVIA <b>${zona.lluvia}/10</b></span>
+    </div>`;
+}
+
+function renderRecList(zona, uso, comp){
+  const productos = PRODUCTOS.filter(p=>p.componente===comp.id);
+  const precios = productos.map(p=>p.precio);
+  const min=Math.min(...precios), max=Math.max(...precios);
+  const puntuados = productos.map(p=>({ p, score:puntuar(p, zona, uso, min, max) }))
+                              .sort((a,b)=>b.score.total-a.score.total);
+
+  document.getElementById("pageTitle").textContent = `Recomendación · ${comp.nombre}`;
+  document.getElementById("pageSub").textContent =
+    `${uso.nombre} en ${zona.nombre} (lat ${estado.lat.toFixed(4)}, lon ${estado.lon.toFixed(4)}). Orden calculado según prioridades de uso: ${Object.entries(uso.w).filter(([,v])=>v>=0.2).map(([k])=>k).join(", ")}.`;
+
+  const labels = { confort:"Confort térmico", costo:"Costo", durabilidad:"Durabilidad", mantenimiento:"Mantenimiento", estetica:"Estética", higiene:"Higiene", sostenibilidad:"Sostenibilidad" };
+
+  document.getElementById("recList").innerHTML = puntuados.map(({p,score},i)=>{
+    const just = justificar(p, zona, uso);
+    const flagsHtml = [
+      p.flags.humedoOK===true ? `<span class="flag good">Resiste humedad alta</span>` : p.flags.humedoOK===false ? `<span class="flag bad">Requiere protección de humedad</span>` : "",
+      p.flags.salinoOK===true ? `<span class="flag good">Resiste ambiente salino</span>` : p.flags.salinoOK===false ? `<span class="flag bad">Riesgo de corrosión costera</span>` : "",
+      p.flags.fsc ? `<span class="flag info">FSC/PEFC</span>` : "",
+      p.flags.claseE1 ? `<span class="flag info">Clase E1</span>` : "",
+    ].filter(Boolean).join("");
+
+    const scoreBars = Object.entries(score.sub).map(([k,v])=>`
+      <div class="score-item">
+        <div class="lbl">${labels[k]||k}</div>
+        <div class="score-bar"><span style="width:${(v/10*100).toFixed(0)}%"></span></div>
+      </div>`).join("");
+
+    return `
+      <article class="rec-card ${i===0?'top':''}">
+        <div class="rec-head">
+          <div style="display:flex;gap:12px;">
+            <div class="rec-rank">${String(i+1).padStart(2,'0')}</div>
+            <div class="rec-titles">
+              <div class="name">${p.nombre}</div>
+              <div class="meta">${p.proveedor} · <span class="badge ${p.estado}">${p.estado}</span>${p.fecha ? ` · actualizado ${p.fecha}`:''}</div>
+            </div>
+          </div>
+          <div class="rec-price">
+            <div class="amt">${fmtColones(p.precio)}</div>
+            <div class="unit">por ${p.unidad}</div>
+          </div>
+        </div>
+        <div class="flags">${flagsHtml}</div>
+        <div class="score-row">${scoreBars}</div>
+        <details class="just">
+          <summary>Ver justificación técnica completa</summary>
+          <div class="just-body">
+            <p><span class="step">1 · Bioclimático / físico</span>${just[0]}</p>
+            <p><span class="step">2 · Mecánico / resiliencia</span>${just[1]}</p>
+            <p><span class="step">3 · Tecnología de recubrimiento</span>${just[2]}</p>
+            <p><span class="step">4 · Sostenibilidad / ciclo de vida</span>${just[3]}</p>
+          </div>
+        </details>
+      </article>`;
+  }).join("");
+}
+
+let sortKey="componente", sortAsc=true;
+function renderCatalog(){
+  const q = document.getElementById("catalogSearch").value.toLowerCase();
+  const compMap = Object.fromEntries(COMPONENTES.map(c=>[c.id,c.nombre]));
+  let rows = PRODUCTOS.map(p=>({
+    componente: compMap[p.componente], nombre:p.nombre, proveedor:p.proveedor,
+    precio:p.precio, unidad:p.unidad, estado:p.estado, fecha:p.fecha||"—"
+  }));
+  if(q) rows = rows.filter(r => (r.componente+r.nombre+r.proveedor).toLowerCase().includes(q));
+  rows.sort((a,b)=>{
+    let av=a[sortKey], bv=b[sortKey];
+    if(typeof av==="number"){ return sortAsc ? av-bv : bv-av; }
+    return sortAsc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+  });
+  document.getElementById("catalogBody").innerHTML = rows.map(r=>`
+    <tr>
+      <td>${r.componente}</td>
+      <td>${r.nombre}</td>
+      <td>${r.proveedor}</td>
+      <td class="price">${fmtColones(r.precio)} <span style="color:var(--text-faint)">/ ${r.unidad}</span></td>
+      <td><span class="badge ${r.estado}">${r.estado}</span></td>
+      <td class="mono">${r.fecha}</td>
+    </tr>`).join("");
+}
+
+function render(){
+  const zona = zonaMasCercana(estado.lat, estado.lon);
+  const uso = USOS.find(u=>u.id===estado.uso);
+  const comp = COMPONENTES.find(c=>c.id===estado.componente);
+  renderZoneCard(zona);
+  renderRecList(zona, uso, comp);
+  renderCatalog();
+}
+
+/* ============================= INIT ============================= */
+renderCityChips();
+renderUsoSeg();
+renderCompGrid();
+document.getElementById("lat").addEventListener("change", actualizarSitio);
+document.getElementById("lon").addEventListener("change", actualizarSitio);
+document.getElementById("catalogSearch").addEventListener("input", renderCatalog);
+document.querySelectorAll("#catalogTable thead th").forEach(th=>{
+  th.addEventListener("click", ()=>{
+    const key = th.dataset.key;
+    sortAsc = (sortKey===key) ? !sortAsc : true;
+    sortKey = key;
+    renderCatalog();
+  });
+});
+render();
+</script>
+

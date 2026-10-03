@@ -1,0 +1,6 @@
+﻿id,nombre,descripcion,componente,zona_sismica_minima,tipo_suelo_ideal
+CR-CIM-01,Placa corrida de concreto reforzado,Cimentación superficial monolítica con refuerzo continuo,cimientos,1,CH/MH
+CR-CIM-02,Placa individual con vigas de amarre,Sistema de placas conectadas por vigas de amarre,cimientos,1,SP/SM
+CR-CIM-03,Placa sobre relleno de sustitución,Placa superficial sobre suelo mejorado y compactado,cimientos,1,GC/GM
+CR-CIM-04,Losa de fundación,Losa monolítica de gran espesor para cargas distribuidas,cimientos,2,CL/ML
+CR-CIM-05,Pilotes cortos y micropilotes,Sistema de pilotes para suelos débiles o licuables,cimientos,3,PT/PL

@@ -1,0 +1,38 @@
+﻿name: Validar Cimientos CSV
+
+on:
+  pull_request:
+    paths:
+      - 'data/cimientos-*.csv'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/cimientos-*.csv'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Ejecutar validador
+        run: python tools/validar_csv.py
+      
+      - name: Comentar en PR
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ Error en validación de cimientos CSV. Revisa los logs.'
+            })

@@ -1,0 +1,56 @@
+name: Aporte de material
+description: Proponer un producto o sistema para revisión e incorporación al catálogo
+title: "[Aporte]: "
+labels:
+  - datos
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Complete la plantilla Excel antes de enviar. No incluya documentos de terceros sin permiso de redistribución; enlace la fuente original.
+  - type: input
+    id: producto
+    attributes:
+      label: Producto o sistema
+      placeholder: Nombre, marca, modelo o configuración
+    validations:
+      required: true
+  - type: dropdown
+    id: componente
+    attributes:
+      label: Componente
+      options:
+        - Cubierta
+        - Cerramientos
+        - Pisos
+        - Cielo rasos
+        - Puertas
+        - Ventanas
+    validations:
+      required: true
+  - type: textarea
+    id: fuentes
+    attributes:
+      label: Fuentes principales
+      description: Incluya enlaces directos, páginas o secciones y fecha de consulta.
+    validations:
+      required: true
+  - type: textarea
+    id: alcance
+    attributes:
+      label: Alcance, condiciones y datos faltantes
+      description: Declare exposición, tratamientos, restricciones e incertidumbres.
+    validations:
+      required: true
+  - type: checkboxes
+    id: verificacion
+    attributes:
+      label: Control previo
+      options:
+        - label: Confirmo que cada propiedad tiene unidad y fuente.
+          required: true
+        - label: Confirmo que el precio incluye fecha, proveedor, unidad y alcance.
+          required: true
+        - label: He declarado datos faltantes y no he convertido ausencia de evidencia en aptitud.
+          required: true
+

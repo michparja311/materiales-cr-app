@@ -1,0 +1,36 @@
+﻿{
+  "fields": [
+    {
+      "name": "fuente_id",
+      "type": "string",
+      "constraints": { "required": true, "unique": true }
+    },
+    {
+      "name": "tipo",
+      "type": "string",
+      "constraints": { "required": true, "enum": ["Norma", "Referencia", "Investigación", "ficha_tecnica"] }
+    },
+    {
+      "name": "titulo",
+      "type": "string",
+      "constraints": { "required": true }
+    },
+    {
+      "name": "autor",
+      "type": "string",
+      "constraints": { "required": false }
+    },
+    {
+      "name": "año",
+      "type": "integer",
+      "constraints": { "required": false, "minimum": 1900 }
+    },
+    {
+      "name": "url",
+      "type": "string",
+      "format": "uri",
+      "constraints": { "required": false }
+    }
+  ],
+  "primaryKey": "fuente_id"
+}

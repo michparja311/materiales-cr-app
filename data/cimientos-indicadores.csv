@@ -1,0 +1,11 @@
+﻿id,producto_id,indicador,nivel_evidencia,fuente_id,peso
+CR-CIM-01-IND-001,CR-CIM-01,Capacidad de carga admisible >= 250 kPa,E5,F001,1.0
+CR-CIM-01-IND-002,CR-CIM-01,Profundidad de desplante >= 0.80 m,E5,F001,1.0
+CR-CIM-01-IND-003,CR-CIM-01,Ancho de cimiento >= 1.0 m,E4,F002,0.9
+CR-CIM-01-IND-004,CR-CIM-01,Factor de seguridad por deslizamiento >= 1.3,E5,F001,1.0
+CR-CIM-01-IND-005,CR-CIM-01,Factor de seguridad por volcamiento >= 1.5,E5,F001,1.0
+CR-CIM-02-IND-001,CR-CIM-02,Separación entre placas 1.0-1.5 m,E4,F002,0.9
+CR-CIM-02-IND-002,CR-CIM-02,Vigas de amarre con refuerzo mínimo fy=420 MPa,E5,F001,1.0
+CR-CIM-02-IND-003,CR-CIM-02,Rigidez lateral en zona sísmica,E4,F003,0.9
+CR-CIM-03-IND-001,CR-CIM-03,Espesor relleno compactado >= 0.30 m,E5,F001,1.0
+CR-CIM-03-IND-002,CR-CIM-03,Grado de compactación >= 95% Proctor Estándar,E5,F001,1.0

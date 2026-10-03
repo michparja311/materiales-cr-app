@@ -1,0 +1,32 @@
+﻿variable,tipo,descripcion,unidad,valor_ejemplo,obligatorio
+zona_climatica,string,Zona climática según clasificación MCR,Código A-E,Tropical Húmedo,true
+provincia,string,Provincia de Costa Rica,Nombre,San José,true
+localidad,string,Localidad específica,Nombre,Escazú,true
+coordenadas,string,Coordenadas WGS84,lat|lon,10.2667|-84.2000,false
+temperatura_promedio,number,Temperatura promedio anual,°C,22.5,false
+precipitacion_anual,number,Precipitación anual,mm,2500,false
+velocidad_viento,number,Velocidad máxima de viento,km/h,150,false
+zona_sismica,integer,Zona sísmica según CSCR,1-4,2,true
+tipo_sitio_cscr,string,Tipo de sitio para diseño sísmico,S0-S3,S2,true
+capacidad_admisible_kpa,number,Capacidad admisible del suelo,kPa,250,true
+aef_calculada,number,Aceleración espectral de referencia,m/s²,0.4,false
+nivel_freatico,number,Profundidad del nivel freático,m,2.5,false
+prof_estrato_resistente,number,Profundidad del estrato resistente,m,4.0,true
+complejidad_geotecnica,string,Complejidad geotécnica del sitio,Baja|Media|Alta,Media,true
+magnitud_obra,string,Magnitud de la obra,Vivienda|Comercio|Industrial,Vivienda,true
+exploracion_minima,string,Exploración geotécnica realizada,SPT|CPT|Calicatas,SPT,true
+area_cim_area_const,number,Relación área de cimientos / área construida,Ratio,0.6,true
+relacion_df_b,number,Relación desplante / ancho cimiento,Ratio,0.8,true
+clasificacion_df_b,string,Clasificación de desplante según ancho,Superficial|Profunda,Superficial,true
+num_pisos,integer,Número de pisos,Entero,2,true
+sistema_pared,string,Sistema de pared/estructura,Concreto|Mampostería|Mixto,Mampostería,true
+longitud_paredes_area,number,Longitud total de paredes / área,Ratio,1.2,true
+expansivo,boolean,¿Suelo expansivo?,Sí|No,No,false
+colapsable,boolean,¿Suelo colapsable?,Sí|No,No,false
+licuable,boolean,¿Terreno licuable?,Sí|No,No,false
+relleno_organico,boolean,¿Relleno no compactado?,Sí|No,No,false
+marcos_rigidos,boolean,¿Marcos rígidos desplante > 2.0m?,Sí|No,No,false
+socavacion,boolean,¿Riesgo de socavación?,Sí|No,No,false
+excavacion_vecino,boolean,¿Excavación junto a vecino?,Sí|No,No,false
+tixotropico,boolean,¿Suelo tixotrópico?,Sí|No,No,false
+diseño_simplificado,boolean,¿Vivienda diseño simplificado?,Sí|No,No,false
